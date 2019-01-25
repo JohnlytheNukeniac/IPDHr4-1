@@ -7,8 +7,8 @@
 ####
 
 team_name = 'Johnly Mais Team' # Only 10 chars displayed.
-strategy_name = 'I will collude, But Do Not Betray Me'
-strategy_description = 'Collude the first round, then collude next round, but if the opponent betray, I will then always betray.'
+strategy_name = 'Collude first 50 rounds unless betrayed. Betray 51st round forward.'
+strategy_description = 'Betray if ever betrayed. If I havent been betrayed yet, Ill betray starting with the 100th round'
     
 def move(my_history, their_history, my_score, their_score):
     ''' Arguments accepted: my_history, their_history are strings.
@@ -17,11 +17,11 @@ def move(my_history, their_history, my_score, their_score):
     Make my move.
     Returns 'c' or 'b'. 
     '''
-    if 'b' in their_history: #If b is in their_history, It will always return with betray
-        return 'b'
+    if 'b' in their_history or len(their_history)>50: 
+        return 'b'               # Betray.
     else:
-        return 'c' #return with collude if b is not in their_history
-
+        return 'c'         
+        
     # my_history: a string with one letter (c or b) per round that has been played with this opponent.
     # their_history: a string of the same length as history, possibly empty. 
     # The first round between these two players is my_history[0] and their_history[0].
